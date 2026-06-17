@@ -2,51 +2,49 @@ import sys
 import glob
 import subprocess
 from pathlib import Path
-from subprocess import CalledProcessError
 
 SRC_BASE_DIR = Path(__file__).parent.joinpath("exercise")
 
+INPUT_MISSING = "input file was missing"
+OUTPUT_MISSING = "output file was missing"
+UNIMPLMENTED = "exercise unimplemented"
 
-def file_level_helper(
-    src_file: str | Path,
+
+def testcase_helper(
+    src_file: Path,
+    input_file: Path,
+    output_file: Path,
 ) -> (
     str | tuple[bool, str | None, str, str]
 ):  # skip reason | succeed, actual, expected, reason
     assert sys.executable, "Frozen module unsupported"
 
-    src = SRC_BASE_DIR / src_file
-    input_file = src.with_suffix(suffix=".in")
-    output_file = src.with_suffix(suffix=".out")
-
     try:
         with open(input_file, "r", encoding="utf-8") as f:
             inputs = f.read()
     except FileNotFoundError:
-        return "input file was missing"
+        return INPUT_MISSING
     try:
         with open(output_file, "r", encoding="utf-8") as f:
             expected_outputs = f.read()
     except FileNotFoundError:
-        return "output file was missing"
+        return OUTPUT_MISSING
 
-    try:
-        proc = subprocess.run(
-            args=[
-                sys.executable,
-                "-X",
-                "utf8",
-                src,
-            ],
-            input=inputs,
-            capture_output=True,
-            check=True,
-            encoding="utf-8",
-        )
-    except CalledProcessError:
-        return False, None, expected_outputs, "Program execution failed!"
+    proc = subprocess.run(
+        args=[
+            sys.executable,
+            "-X",
+            "utf8",
+            src_file,
+        ],
+        input=inputs,
+        capture_output=True,
+        check=False,
+        encoding="utf-8",
+    )
 
     if "NotImplementedError" in proc.stderr:
-        return "exercise unimplemented"
+        return UNIMPLMENTED
     actual = proc.stdout.strip()
     return (
         expected_outputs.strip() == proc.stdout.strip(),
@@ -57,23 +55,42 @@ def file_level_helper(
 
 
 def main():
+    skip_count = 0
+
     for test_file in glob.iglob(pathname="**/*.py", root_dir=SRC_BASE_DIR):
-        print(f"Testing {test_file}... ", file=sys.stderr, end="")
+        src = SRC_BASE_DIR / test_file
 
-        test_result = file_level_helper(test_file)
+        for input_file in sorted(src.parent.glob(f"{src.stem}.in*")):
+            output_file = input_file.with_name(
+                input_file.name.replace(".in", ".out", 1)
+            )
 
-        if isinstance(test_result, str):
-            print(f"Skipped: {test_result}", file=sys.stderr)
-            continue
+            test_result = testcase_helper(src, input_file, output_file)
 
-        succ, actual, expected, reason = test_result
-        if succ:
-            print("Passed.", file=sys.stderr)
-        else:
-            print(f"Failed: {reason}", file=sys.stderr)
-            if actual:
-                print(f"Actual:\n{actual}", file=sys.stderr)
-                print(f"Expect:\n{expected}", file=sys.stderr)
+            if isinstance(test_result, str):
+                reason = test_result
+
+                skip_count += 1
+                if "-v" in sys.argv or "--verbose" in sys.argv:
+                    print(f"Skipped {input_file}: {reason}", file=sys.stderr)
+
+                if reason == UNIMPLMENTED:
+                    break
+                else:
+                    continue
+
+            print(f"Testing {input_file}... ", file=sys.stderr, end="")
+
+            succ, actual, expected, reason = test_result
+            if succ:
+                print("Passed.", file=sys.stderr)
+            else:
+                print(f"Failed: {reason}", file=sys.stderr)
+                if actual:
+                    print(f"Actual:\n{actual}", file=sys.stderr)
+                    print(f"Expect:\n{expected}", file=sys.stderr)
+
+    print(f"Skipped {skip_count} tests.", file=sys.stderr)
 
 
 if __name__ == "__main__":
