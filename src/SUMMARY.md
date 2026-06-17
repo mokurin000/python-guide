@@ -6,3 +6,4 @@
 - [初识 Python](./04-hello-python.md)
 - [数据类型](05-data-types.md)
 - [变量](06-variables.md)
+- [开始练习](07-exercise.md)
