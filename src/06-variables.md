@@ -36,3 +36,17 @@ Grüße = "Hello, World!" # 德语
 ```
 
 不过，变量名不可以以数字开头。
+
+## 类型提示
+
+在前面的示例中，我们并没有在代码里标注变量的数据类型。
+
+Python 提供了 `type hinting`（类型提示）机制。不过，它与 `C` 语言中的类型声明不同，并不会对变量施加强制性的类型约束，而是作为面向开发者和工具的提示信息。
+
+```python
+integer: int = 5
+real_number: float = 1.14514
+hello: str = "Hello"
+
+mismatched: int = 5.0 # 类型提示不会在运行时强制检查
+```
