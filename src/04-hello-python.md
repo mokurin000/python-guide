@@ -26,7 +26,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 现在输入 `print("Hello, world")`，然后按回车运行：
 
-```text
+```python
 >>> print("Hello, world")
 Hello, world
 ```
@@ -41,7 +41,7 @@ Hello, world
 
 进入 Python 的交互模式后，我们可以尝试输入一些计算表达式。
 
-```text
+```python
 >>> 1 + 2 # 整数加法
 3
 >>> 1 - 10 # 整数减法
