@@ -42,3 +42,5 @@
 ![安装完成](img/03/step04.png)
 
 ## Visual Studio Code
+
+**WIP: VSCode v.s. PyCharm**
