@@ -9,17 +9,25 @@ SRC_BASE_DIR = Path(__file__).parent.joinpath("exercise")
 
 def file_level_helper(
     src_file: str | Path,
-) -> None | tuple[bool, str | None, str, str]:  # succeed, actual, expected, reason
+) -> (
+    str | tuple[bool, str | None, str, str]
+):  # skip reason | succeed, actual, expected, reason
     assert sys.executable, "Frozen module unsupported"
 
     src = SRC_BASE_DIR / src_file
     input_file = src.with_suffix(suffix=".in")
     output_file = src.with_suffix(suffix=".out")
 
-    with open(input_file, "r", encoding="utf-8") as f:
-        inputs = f.read()
-    with open(output_file, "r", encoding="utf-8") as f:
-        expected_outputs = f.read()
+    try:
+        with open(input_file, "r", encoding="utf-8") as f:
+            inputs = f.read()
+    except FileNotFoundError:
+        return "input file was missing"
+    try:
+        with open(output_file, "r", encoding="utf-8") as f:
+            expected_outputs = f.read()
+    except FileNotFoundError:
+        return "output file was missing"
 
     try:
         proc = subprocess.run(
@@ -38,7 +46,7 @@ def file_level_helper(
         return False, None, expected_outputs, "Program execution failed!"
 
     if "NotImplementedError" in proc.stderr:
-        return None
+        return "exercise unimplemented"
     actual = proc.stdout.strip()
     return (
         expected_outputs.strip() == proc.stdout.strip(),
@@ -54,8 +62,8 @@ def main():
 
         test_result = file_level_helper(test_file)
 
-        if test_result is None:
-            print("Skipped: not implemented", file=sys.stderr)
+        if isinstance(test_result, str):
+            print(f"Skipped: {test_result}", file=sys.stderr)
             continue
 
         succ, actual, expected, reason = test_result
