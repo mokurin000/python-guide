@@ -1,7 +1,6 @@
 import sys
 import glob
 import subprocess
-from io import StringIO
 from pathlib import Path
 from subprocess import CalledProcessError
 
