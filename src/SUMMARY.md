@@ -6,5 +6,6 @@
 - [初识 Python](./04-hello-python.md)
 - [数据类型](05-data-types.md)
 - [变量](06-variables.md)
-- [开始练习](07-exercise.md)
-- [内置函数](08-basic-builtin.md)
+- [内置函数](07-basic-builtin.md)
+- [开始练习](08-exercise.md)
+- [流程控制](09-controlflow.md)
