@@ -15,3 +15,5 @@ if ...:
     triangle_validation = "o"
 else:
     triangle_validation = "x"
+
+print(triangle_validation)
