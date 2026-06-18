@@ -14,10 +14,15 @@ def testcase_helper(
     src_file: Path,
     input_file: Path,
     output_file: Path,
+    answer_mode=False,
 ) -> (
     str | tuple[bool, str | None, str, str]
 ):  # skip reason | succeed, actual, expected, reason
     assert sys.executable, "Frozen module unsupported"
+
+    answer_path = src_file.parent / "answer" / src_file.name
+    if answer_mode and answer_path.exists():
+        src_file = answer_path
 
     try:
         with open(input_file, "r", encoding="utf-8") as f:
@@ -56,10 +61,12 @@ def testcase_helper(
 
 
 def main():
+    verbose_mode = "-v" in sys.argv or "--verbose" in sys.argv
+    answer_mode = "-a" in sys.argv or "--answer" in sys.argv
+
     skip_count = 0
     succ_count = 0
     fail_count = 0
-    verbose_mode = "-v" in sys.argv or "--verbose" in sys.argv
 
     for test_file in glob.iglob(pathname="**/*.py", root_dir=SRC_BASE_DIR):
         src = SRC_BASE_DIR / test_file
@@ -77,7 +84,12 @@ def main():
                 input_file.name.replace(".in", ".out", 1)
             )
 
-            test_result = testcase_helper(src, input_file, output_file)
+            test_result = testcase_helper(
+                src,
+                input_file,
+                output_file,
+                answer_mode=answer_mode,
+            )
 
             if isinstance(test_result, str):
                 reason = test_result

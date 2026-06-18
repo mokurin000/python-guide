@@ -8,5 +8,15 @@ score = int(input())
 # [60, 70)  -> D
 # [0, 60)   -> F
 
-# 删掉此行后补充实现。
-raise NotImplementedError("代码未实现")
+if score >= 90:
+    grade = "A"
+elif score >= 80:
+    grade = "B"
+elif score >= 70:
+    grade = "C"
+elif score >= 60:
+    grade = "D"
+else:
+    grade = "F"
+
+print(grade)
