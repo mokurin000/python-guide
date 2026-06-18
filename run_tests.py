@@ -86,10 +86,7 @@ def main():
                 if verbose_mode:
                     print(f"Skipped Case {case_num}: {reason}", file=sys.stderr)
 
-                if reason == UNIMPLMENTED:
-                    break
-                else:
-                    continue
+                continue
 
             print(f"Case {case_num}: ", file=sys.stderr, end="")
 
