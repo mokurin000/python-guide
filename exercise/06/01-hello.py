@@ -3,6 +3,7 @@
 """
 
 name: str = input()
+# 首字母大写，说你好
 print(f"Hello, {name.capitalize()}!")
 
 # 给 int() 传入 input() 返回的字符串，把它转换成整数类型。
