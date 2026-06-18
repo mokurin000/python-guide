@@ -45,6 +45,7 @@ def testcase_helper(
 
     if "NotImplementedError" in proc.stderr:
         return UNIMPLMENTED
+
     actual = proc.stdout.strip()
     return (
         expected_outputs.strip() == proc.stdout.strip(),
@@ -56,12 +57,23 @@ def testcase_helper(
 
 def main():
     skip_count = 0
+    succ_count = 0
+    fail_count = 0
+    verbose_mode = "-v" in sys.argv or "--verbose" in sys.argv
 
     for test_file in glob.iglob(pathname="**/*.py", root_dir=SRC_BASE_DIR):
         src = SRC_BASE_DIR / test_file
 
-        for input_file in sorted(src.parent.glob(f"{src.stem}.in*")):
-            output_file = input_file.with_name(
+        input_files = sorted(src.parent.glob(f"in/{src.stem}.in*"))
+        if not input_files:
+            skip_count += 1
+            if verbose_mode:
+                print(f"Skipped {src}: no testcase available", file=sys.stderr)
+
+        print(f"Testing {src}...", file=sys.stderr)
+
+        for case_num, input_file in enumerate(input_files, start=1):
+            output_file = src.parent.joinpath("out").joinpath(
                 input_file.name.replace(".in", ".out", 1)
             )
 
@@ -71,17 +83,19 @@ def main():
                 reason = test_result
 
                 skip_count += 1
-                if "-v" in sys.argv or "--verbose" in sys.argv:
-                    print(f"Skipped {input_file}: {reason}", file=sys.stderr)
+                if verbose_mode:
+                    print(f"Skipped Case {case_num}: {reason}", file=sys.stderr)
 
                 if reason == UNIMPLMENTED:
                     break
                 else:
                     continue
 
-            print(f"Testing {input_file}... ", file=sys.stderr, end="")
+            print(f"Case {case_num}: ", file=sys.stderr, end="")
 
             succ, actual, expected, reason = test_result
+            succ_count += succ
+            fail_count += not succ
             if succ:
                 print("Passed.", file=sys.stderr)
             else:
@@ -91,6 +105,13 @@ def main():
                     print(f"Expect:\n{expected}", file=sys.stderr)
 
     print(f"Skipped {skip_count} tests.", file=sys.stderr)
+
+    print(
+        f"Passed tests: {succ_count} ({succ_count / (succ_count + fail_count) * 100:.1f}%)"
+    )
+    print(
+        f"Failed tests: {fail_count} ({fail_count / (succ_count + fail_count) * 100:.1f}%)"
+    )
 
 
 if __name__ == "__main__":
