@@ -179,7 +179,7 @@ False
 
 ### 键的要求
 
-字典的键必须是**可哈希 (hashable)** 的。简单来说，不可变类型（如 `int`、`float`、`str`、`bool`）可以作为键，而可变类型（如 `list`、`dict`、`set`）则不可以。
+字典的键必须是**可计算哈希 (hashable)** 的。简单来说，不可变类型（如 `int`、`float`、`str`、`bool`）可以作为键，而可变类型（如 `list`、`dict`、`set`）则不可以。
 
 ```python
 >>> {[1, 2]: "value"}  # 尝试用列表做键，会报错
