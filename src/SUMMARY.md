@@ -9,3 +9,4 @@
 - [内置函数](07-basic-builtin.md)
 - [开始练习](08-exercise.md)
 - [流程控制](09-controlflow.md)
+- [数据结构](./10-datastructure.md)

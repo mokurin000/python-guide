@@ -31,9 +31,9 @@
 
 ### Day 3：数据结构
 
-* [ ] `list`
-* [ ] `dict`
-* [ ] `set`
+* [x] `list`
+* [x] `dict`
+* [x] `set`
 
 ### Day 4：循环与遍历
 
