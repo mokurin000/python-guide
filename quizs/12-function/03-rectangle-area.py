@@ -4,7 +4,7 @@
 """
 
 
-def area(width, height=10):
+def area(width: int, height: int = 10) -> int:
     """计算矩形的面积。
 
     >>> area(5)

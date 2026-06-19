@@ -9,7 +9,7 @@
 """
 
 
-def gcd(a, b):
+def gcd(a: int, b: int) -> int:
     """计算 a 和 b 的最大公约数。
 
     >>> gcd(48, 18)

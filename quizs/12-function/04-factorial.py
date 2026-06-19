@@ -7,7 +7,7 @@ n! 的递归形式：n! = n × (n-1)!，当 n <= 1 时返回 1。
 """
 
 
-def factorial(n):
+def factorial(n: int) -> int:
     """计算 n 的阶乘。
 
     >>> factorial(0)

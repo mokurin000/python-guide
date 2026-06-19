@@ -5,7 +5,7 @@ max() 函数文档：https://docs.python.org/3/library/functions.html#max
 """
 
 
-def max_of_three(a, b, c):
+def max_of_three(a: int, b: int, c: int) -> int:
     """返回三个数中的最大值。
 
     >>> max_of_three(1, 5, 3)

@@ -10,7 +10,7 @@
 """
 
 
-def fibonacci(n):
+def fibonacci(n: int) -> int:
     """返回斐波那契数列的第 n 项。
 
     >>> fibonacci(0)
