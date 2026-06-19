@@ -16,3 +16,6 @@
 - [对象与类](./14-class.md)
 - [迭代器与生成器](./15-iteration.md)
 - [函数式编程](./16-functional.md)
+- [模块与导入](./17-modules.md)
+- [包与项目](./18-packages.md)
+- [附录：第三方包与虚拟环境](./appendix-packages.md)
