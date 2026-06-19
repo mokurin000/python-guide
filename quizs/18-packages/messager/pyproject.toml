@@ -1,0 +1,10 @@
+[project]
+name = "messager"
+version = "0.1.0"
+description = "一个简单的消息发送模拟包，用于教学演示"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = []
+
+[tool.uv]
+package = true

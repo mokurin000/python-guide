@@ -2,7 +2,9 @@
 
 上一章我们学习了如何导入和使用模块。当模块越来越多时，自然需要一种方式将它们组织起来——这就是**包 (Package)**。
 
-本章还将介绍现代 Python 项目工具 `uv`，并通过一个完整的 `pygrep` 示例，展示如何从零开始创建和组织一个真正的 Python 项目。
+本章还将介绍现代 Python 项目工具 [uv]，并通过一个完整的 `pygrep` 示例，展示如何从零开始创建和组织一个真正的 Python 项目。
+
+[uv]: https://docs.astral.sh/uv/getting-started/installation/
 
 ## 什么是包
 
@@ -12,23 +14,27 @@
 
 包在文件系统上就是一个目录，里面可以包含多个 `.py` 文件（即模块）。为了让 Python 将该目录视为包，目录中通常包含一个 `__init__.py` 文件。
 
-例如，一个简单的消息工具包：
+例如，本书提供的 `messager` 包（位于 `quizs/18-packages/messager/`）：
 
 ```
-messenger/
-├── __init__.py
-├── email.py
-└── sms.py
+messager/
+├── pyproject.toml
+├── README.md
+└── src/
+    └── messager/
+        ├── __init__.py
+        ├── email.py
+        └── sms.py
 ```
 
 ```python
-# messenger/email.py
+# src/messager/email.py
 def send(to, subject, body):
     return f"发送邮件到 {to}：{subject}"
 ```
 
 ```python
-# messenger/sms.py
+# src/messager/sms.py
 def send(phone, message):
     return f"发送短信到 {phone}：{message}"
 ```
@@ -36,11 +42,11 @@ def send(phone, message):
 ### 导入包中的模块
 
 ```python
->>> import messenger.email
->>> messenger.email.send("alice@example.com", "你好", "Hello!")
+>>> import messager.email
+>>> messager.email.send("alice@example.com", "你好", "Hello!")
 '发送邮件到 alice@example.com：你好'
 
->>> from messenger.sms import send
+>>> from messager.sms import send
 >>> send("13800138000", "包的概念很简单")
 '发送短信到 13800138000：包的概念很简单'
 ```
@@ -54,7 +60,7 @@ def send(phone, message):
 - 将子模块中的名称"提升"到包级别
 
 ```python
-# messenger/__init__.py
+# src/messager/__init__.py
 from .email import send as send_email
 from .sms import send as send_sms
 
@@ -64,30 +70,32 @@ __all__ = ["send_email", "send_sms"]
 有了 `__init__.py` 后，可以这样导入：
 
 ```python
->>> from messenger import send_email
+>>> from messager import send_email
 >>> send_email("alice@example.com", "你好", "Hello!")
 '发送邮件到 alice@example.com：你好'
 ```
 
 > 在 Python 3.3+ 中，即使没有 `__init__.py` 文件，目录也可以被视为包，这称为**隐式命名空间包 (Implicit Namespace Package)**。但对于大多数项目，显式添加 `__init__.py` 仍然是好习惯。
 
-### 子包
+### 子模块
 
-包可以嵌套——包中的子目录就是子包：
+包可以嵌套——包中的子目录就是子模块 (sub-module)：
 
 ```
-messenger/
-├── __init__.py
-├── email.py
-├── sms.py
-└── providers/
-    ├── __init__.py
-    ├── sendgrid.py
-    └── twilio.py
+messager/
+└── src/
+    └── messager/
+        ├── __init__.py
+        ├── email.py
+        ├── sms.py
+        └── providers/
+            ├── __init__.py
+            ├── sendgrid.py
+            └── twilio.py
 ```
 
 ```python
->>> from messenger.providers.sendgrid import send_via_sendgrid
+>>> from messager.providers.sendgrid import send_via_sendgrid
 ```
 
 ## 使用 `uv` 创建项目
@@ -249,7 +257,7 @@ $ cd pygrep
 $ uv run python -m pygrep import src/pygrep/core.py
 from .core import filter_lines
 
-# 通过管道搜索（查看当前目录中哪些文件包含 "class"）
+# 通过管道搜索（查看当前目录中哪些文件包含 "py"）
 $ ls | uv run python -m pygrep py
 pygrep
 ```
@@ -268,17 +276,26 @@ pygrep
 
 ## 小结
 
-| 概念               | 说明                                     |
-| ------------------ | ---------------------------------------- |
-| 包 (Package)       | 包含多个模块的目录，通常含 `__init__.py` |
-| `__init__.py`      | 包初始化文件，在包被导入时执行           |
-| 子包 (Sub-package) | 包中的子目录                             |
-| `uv init`          | 创建现代 Python 项目结构                 |
-| `src/` 布局        | 源码放在 `src/` 下，分离关注点           |
-| `python -m <包名>` | 以模块方式运行包，执行 `__main__.py`     |
+| 概念                | 说明                                     |
+| ------------------- | ---------------------------------------- |
+| 包 (Package)        | 包含多个模块的目录，通常含 `__init__.py` |
+| `__init__.py`       | 包初始化文件，在包被导入时执行           |
+| 子模块 (Sub-module) | 包中的子目录                             |
+| `uv init`           | 创建现代 Python 项目结构                 |
+| `src/` 布局         | 源码放在 `src/` 下，分离关注点           |
+| `python -m <包名>`  | 以模块方式运行包，执行 `__main__.py`     |
 
 ## 练习
 
-完成 `quizs/18-packages/*.py`。
+完成 `quizs/18-packages/messager/quiz/01-send-message.py`。
 
-你可以直接使用 `▷` 运行对应程序，检查是否通过了测试。
+这个练习需要从真实的 `messager` 包中导入模块并调用函数。请先进入该包目录，然后用 `uv run` 在虚拟环境中运行：
+
+```bash
+$ cd quizs/18-packages/messager
+$ uv run python quiz/01-send-message.py
+```
+
+> 在 VS Code 中，可以使用 <kbd>Ctrl</kbd> + <kbd>`</kbd>（反引号）快速打开终端，然后输入上述命令。
+
+第一次运行时，`uv` 会自动创建虚拟环境并安装 `messager` 包。
