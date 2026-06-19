@@ -138,13 +138,20 @@
 ### Day 11：文件读写
 
 * [ ] `open()`
+  * [ ] Windows: encoding=`utf-8`
 * [ ] `read()`
 * [ ] `write()`
 * [ ] `with`
 * [ ] 文本模式与二进制模式
 
 * [ ] `pathlib`
+  * [ ] `Path.joinpath`
+  * [ ] `/`
 * [ ] `json`
+  * [ ] load, loads
+  * [ ] dump, dumps
+    * [ ] indent=4
+    * [ ] ensure_ascii=False
 
 ### 附录：进阶 Python
 
