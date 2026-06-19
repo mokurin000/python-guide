@@ -5,9 +5,16 @@
 """
 
 
+class EndlessIter:
+    def __next__(self):
+        return ()
+
+
 def take(iterable, n: int) -> list:
     """返回可迭代对象的前 n 个元素。
 
+    >>> take(EndlessIter, 1) # 不得通过 list() 和切片实现。
+    [()]
     >>> take([10, 20, 30, 40, 50], 3)
     [10, 20, 30]
     >>> take("hello", 2)
