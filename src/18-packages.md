@@ -287,15 +287,28 @@ pygrep
 
 ## 练习
 
-完成 `quizs/18-packages/messager/quiz/01-send-message.py`。
+### 1. 导入包
 
-这个练习需要从真实的 `messager` 包中导入模块并调用函数。请先进入该包目录，然后用 `uv run` 在虚拟环境中运行：
+完成 `quizs/18-packages/messager/quiz/send-message.py`，从 `messager` 包中导入模块并调用函数。
 
 ```bash
 $ cd quizs/18-packages/messager
-$ uv run python quiz/01-send-message.py
+$ uv run python quiz/send-message.py
+```
+
+### 2. 扩展包 —— 为正则搜索实现 `-r` 选项
+
+`pygrep` 是本章演示的极简搜索工具（见上方"最小示例：`pygrep`"）。本章练习中，我们已经将其实现为一个完整包，位于 `quizs/18-packages/pygrep/`。
+
+当前 `pygrep` 只支持纯文本包含检查。在 `src/pygrep/core.py` 中已预留了两个函数 `contains_regex` 和 `filter_lines_regex` 的签名。你的任务是用 `re.search()` 实现它们。
+
+之后，`pygrep -r` 就可使用正则表达式搜索了。
+
+```bash
+$ cd quizs/18-packages/pygrep
+$ uv run python quiz/01-regex-grep.py
 ```
 
 > 在 VS Code 中，可以使用 <kbd>Ctrl</kbd> + <kbd>`</kbd>（反引号）快速打开终端，然后输入上述命令。
 
-第一次运行时，`uv` 会自动创建虚拟环境并安装 `messager` 包。
+第一次运行时，`uv` 会自动创建虚拟环境并安装对应包。

@@ -12,7 +12,7 @@ messager/
 ```
 
 请确保在 `messager/` 目录下运行本文件：
-    uv run python quiz/01-send-message.py
+    uv run python quiz/send-message.py
 """
 
 

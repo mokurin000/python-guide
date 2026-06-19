@@ -1,0 +1,10 @@
+[project]
+name = "pygrep"
+version = "0.1.0"
+description = "一个极简的文本搜索工具，用于教学演示"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = []
+
+[tool.uv]
+package = true
