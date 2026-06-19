@@ -243,20 +243,6 @@ factorial(5)
 → 120
 ```
 
-### 斐波那契数列
-
-斐波那契数列的定义：`fib(0)=0`，`fib(1)=1`，`fib(n)=fib(n-1)+fib(n-2)`。
-
-```python
->>> def fibonacci(n):
-...     if n <= 1: # 递归边界
-...         return n
-...     return fibonacci(n - 1) + fibonacci(n - 2)  # 递归计算
-...
->>> fibonacci(10)
-55
-```
-
 ### 递归与迭代
 
 任何递归都可以用**迭代 (iteration)**（即循环）来改写。递归的代码通常更简洁、更接近数学定义，但可能会消耗更多的内存（调用栈）和时间（重复计算）。
