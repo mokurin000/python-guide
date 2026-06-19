@@ -135,28 +135,28 @@
   * [x] 虚拟环境（附录）
   * [x] 安装依赖（附录）
 
-### Day 11：文件读写
+### 附录：文件读写
 
-* [ ] `open()`
-  * [ ] Windows: encoding=`utf-8`
-* [ ] `read()`
-* [ ] `write()`
-* [ ] `with`
-* [ ] 文本模式与二进制模式
+* [x] `open()`
+  * [x] Windows: encoding=`utf-8`
+* [x] `read()`
+* [x] `write()`
+* [x] `with`
+* [x] 文本模式与二进制模式
 
-* [ ] `pathlib`
-  * [ ] `Path.joinpath`
-  * [ ] `/`
-* [ ] `json`
-  * [ ] load, loads
-  * [ ] dump, dumps
-    * [ ] indent=4
-    * [ ] ensure_ascii=False
+* [x] `pathlib`
+  * [x] `Path.joinpath`
+  * [x] `/`
+* [x] `json`
+  * [x] load, loads
+  * [x] dump, dumps
+    * [x] indent=4
+    * [x] ensure_ascii=False
 
-### 附录：进阶 Python
+### 附录：进阶特性
 
-* [ ] 函数装饰器
+* [x] 函数装饰器
 
-* [ ] `contextlib.AbstractContextManager`
-  * [ ] `__enter__()`
-  * [ ] `__exit__()`
+* [x] `contextlib.AbstractContextManager`
+  * [x] `__enter__()`
+  * [x] `__exit__()`
