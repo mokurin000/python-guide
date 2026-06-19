@@ -69,26 +69,27 @@
 
 ### Day 7：对象与类
 
-* [ ] 对象
-* [ ] `id()`
-* [ ] `is`
-* [ ] `isinstance()`
+* [x] 对象
+* [x] `id()`
+* [x] `is`
+  * [x] 函数可变对象默认值
+* [x] `isinstance()`
 
-* [ ] `class`
-  * [ ] `self`
-  * [ ] `__init__`
-  * [ ] 实例方法
-  * [ ] 类变量 v.s. 实例变量
+* [x] `class`
+  * [x] `self`
+  * [x] `__init__`
+  * [x] 实例方法
+  * [x] 类变量 v.s. 实例变量
 
-* [ ] 继承
-  * [ ] `issubclass()`
+* [x] 继承
+  * [x] `issubclass()`
 
-* [ ] 特殊方法
-  * [ ] `__str__`
-  * [ ] `__repr__`
+* [x] 特殊方法
+  * [x] `__str__`
+  * [x] `__repr__`
 
-* [ ] 附录: Protocol v.s. ABC
-  * [ ] `__subclasshook__()`
+* [x] 附录: Protocol v.s. ABC
+  * [x] `__subclasshook__()`
 
 ### Day 8：迭代器与生成器
 
