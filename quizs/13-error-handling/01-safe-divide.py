@@ -6,7 +6,7 @@
 """
 
 
-def safe_divide(a, b):
+def safe_divide(a: int | float, b: int | float):
     """安全除法，除零时返回 None。
 
     >>> safe_divide(10, 2)

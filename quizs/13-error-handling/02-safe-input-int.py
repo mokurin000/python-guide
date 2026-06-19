@@ -6,7 +6,7 @@
 """
 
 
-def safe_input_int(prompt):
+def safe_input_int(prompt: str):
     """循环直到用户输入一个有效的整数。
 
     >>> safe_input_int("输入：")  # 测试时手动输入 "abc" 然后 "42"
