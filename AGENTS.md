@@ -16,7 +16,9 @@ Roadmap 位于 `README.md` 内。
 
 # 练习文件约定
 
-## 文件结构
+## Day 1-4：exercise/ + run_tests.py (基于 I/O)
+
+文件结构：
 
 ```
 exercise/<章节>/
@@ -31,28 +33,60 @@ exercise/<章节>/
     └── 01-exercise-name.out2
 ```
 
+测试由 `run_tests.py` 驱动，比较程序的标准输出与 `.out` 文件。
+
+## Day 5+：quizs/ + doctest (自包含测试)
+
+从 Day 5 开始，不再使用 `exercise/` 和 `run_tests.py`。练习文件直接放在 `quizs/<章节>/` 下，每个文件自包含 `doctest` 测试用例。学生手动运行 `python quizs/<章节>/<文件>.py` 来验证。
+
+文件结构：
+
+```
+quizs/
+├── <章节>/
+│   ├── 01-exercise-name.py     # 练习文件（含 doctest）
+│   ├── 02-exercise-name.py
+│   └── ...
+```
+
+练习文件格式：
+
+```python
+"""目标：<题目描述>
+
+提示：<相关特性的提示>
+"""
+
+def func(...):
+    """<函数说明>
+
+    >>> func(输入)
+    预期输出
+    >>> func(输入)
+    预期输出
+    """
+    raise NotImplementedError("代码未实现")
+
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod(verbose=True)
+```
+
 ## 命名规则
 
 - 练习文件名使用连字符 `-` 而非下划线，例如 `01-max-in-list.py`。
-- 输入/输出文件扩展名为 `.in1`, `.in2` / `.out1`, `.out2`。
 
 ## 学生存根要求
 
 每个练习文件需要包含：
-1. 题目背景（中文注释）
-2. 相关特性的提示（中文注释）
-3. `raise NotImplementedError("代码未实现")` 占位符，用于跳过未完成的练习
+1. 题目背景（中文注释或文档字符串）
+2. 相关特性的提示
+3. `raise NotImplementedError("代码未实现")` 占位符
 4. 用 `...` 作为代码中需要替换部分的占位提示
-5. 参考实现位于 `answer/`，保持注释部分一致
 
 ## 术语
 
 中文术语后用括号标注英文术语，例如：列表 (list)、字典 (dict)、集合 (set)。
 
 hashable: 可计算哈希
-
-# run_tests.py
-
-这是一个基于 输入/输出 的测试脚本，用于提供 `函数` 章节之前的代码测试。
-
-在 `函数` 章节和之后，代码测试将于 `quizs/` 提供，调用 Python 本身的 `doctest` 原地进行测试。
