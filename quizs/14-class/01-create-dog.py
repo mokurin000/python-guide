@@ -24,7 +24,9 @@ class Dog:
         raise NotImplementedError("代码未实现")
 
     def bark(self) -> str:
-        """返回狗的叫声，格式为 "{name}说：汪汪！"""
+        """
+        返回狗的叫声，格式为 "{name}说：汪汪！"
+        """
         raise NotImplementedError("代码未实现")
 
 
