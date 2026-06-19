@@ -1,7 +1,7 @@
 """目标：实现几个函数，练习 id()、is 操作符和 isinstance() 的使用。
 
 提示：
-- id(obj) 返回对象的唯一标识（内存地址）。
+- id(obj) 返回对象的唯一标识（CPython中是它的内存地址）。
 - obj is other 等价于 id(obj) == id(other)，判断是否同一个对象。
 - isinstance(obj, type) 检查对象是否属于某类型。
 """
