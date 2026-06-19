@@ -19,5 +19,5 @@
 - [模块与导入](./17-modules.md)
 - [包与项目](./18-packages.md)
 - [附录：文件读写](./appendix-file-io.md)
-- [附录：进阶特性](./appendix-advanced.md)
+- [附录：装饰器](./appendix-decorators.md)
 - [附录：第三方包与虚拟环境](./appendix-packages.md)
