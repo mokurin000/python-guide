@@ -111,11 +111,11 @@
 
 ### Day 9：函数式编程
 
-* [ ] `lambda`
-* [ ] `map()`
-* [ ] `filter()`
-* [ ] `functools.reduce()`
-* [ ] `functools.partial()`
+* [x] `lambda`
+* [x] `map()`
+* [x] `filter()`
+* [x] `functools.reduce()`
+* [x] `functools.partial()`
 
 ### Day 10：模块与项目
 
