@@ -5,7 +5,7 @@
 """
 
 
-def validate_age(age: int):
+def validate_age(age: int) -> None:
     """验证年龄是否合法。
 
     >>> validate_age(25)

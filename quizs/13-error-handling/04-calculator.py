@@ -7,7 +7,7 @@
 """
 
 
-def calculate(a: int | float, op: str, b: int | float):
+def calculate(a: int | float, op: str, b: int | float) -> int | float | None:
     """简易计算器，支持 +、-、*、/ 四则运算。
 
     >>> calculate(3, "+", 5)
