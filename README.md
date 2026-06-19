@@ -15,6 +15,7 @@
 
   * [x] `int`
   * [x] `float`
+    * [x] 附录: IEEE 754
   * [x] `str`
   * [x] `bool`
 * [x] 输入与输出
@@ -37,17 +38,25 @@
 ### Day 4：循环与遍历
 
 * [ ] `for`
-* [ ] `range(end)`
-* [ ] `range(start, end, step=1)`
+* [ ] `range()`
 * [ ] 遍历 `list`
 * [ ] 遍历 `set`/`dict`
 
-### Day 5：函数
+* [ ] 列表推导式
+* [ ] 字典推导式
+* [ ] 集合推导式
+
+### Day 5：函数与递归
 
 * [ ] `def`
 * [ ] 参数默认值
 * [ ] 返回值
 * [ ] 作用域
+
+* [ ] 递归
+  * [ ] 递归终止条件
+  * [ ] 调用栈
+  * [ ] 递归与迭代
 
 ### Day 6：错误处理
 
@@ -61,33 +70,40 @@
 * [ ] 对象
 * [ ] `id()`
 * [ ] `is`
-* [] `issubclass()`
-* [] `isinstance()`
+* [ ] `isinstance()`
 
 * [ ] `class`
   * [ ] `self`
   * [ ] `__init__`
   * [ ] 实例方法
-  * [ ] 特殊方法
-    * [ ] `__str__`
-    * [ ] `__repr__`
+  * [ ] 类变量 v.s. 实例变量
+
+* [ ] 继承
+  * [ ] `issubclass()`
+
+* [ ] 特殊方法
+  * [ ] `__str__`
+  * [ ] `__repr__`
+
+* [ ] 附录: Protocol v.s. ABC
+  * [ ] `__subclasshook__()`
 
 ### Day 8：迭代器与生成器
 
 * [ ] 可迭代对象
-  * [ ] `iter()`
 * [ ] 迭代器
-  * [ ] `next()`
-  * [ ] `StopIteration`
+* [ ] `iter()`
+* [ ] `next()`
+* [ ] `StopIteration`
+
 * [ ] 实现迭代器
   * [ ] `__iter__()`
   * [ ] `__next__()`
+
 * [ ] 生成器
-  * [ ] `yield`
-* [ ] 推导式
-  * [ ] 列表推导式
-  * [ ] 字典推导式
-  * [ ] 集合推导式
+  * [ ] 生成器函数
+    * [ ] `yield`
+  * [ ] 生成器推导式
 
 ### Day 9：函数式编程
 
@@ -97,17 +113,7 @@
 * [ ] `functools.reduce()`
 * [ ] `functools.partial()`
 
-### Day 10：文件读写
-
-* [ ] `open()`
-* [ ] `read()`
-* [ ] `readline()`
-* [ ] `readlines()`
-* [ ] `write()`
-* [ ] `with`
-* [ ] 文本模式与二进制模式
-
-### Day 11：模块与项目
+### Day 10：模块与项目
 
 * [ ] `import`
 * [ ] `from ... import ...`
@@ -125,10 +131,18 @@
   * [ ] 虚拟环境
   * [ ] 安装依赖
 
-### Day 12：进阶 Python
+### Day 11：文件读写
 
-* [ ] Protocol v.s. ABC
-  * [ ] `__subclasshook__()`
+* [ ] `open()`
+* [ ] `read()`
+* [ ] `write()`
+* [ ] `with`
+* [ ] 文本模式与二进制模式
+
+* [ ] `pathlib`
+* [ ] `json`
+
+### 附录：进阶 Python
 
 * [ ] 函数装饰器
 
