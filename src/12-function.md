@@ -180,6 +180,29 @@ Python 查找变量时遵循 **LEGB** 规则（从内到外）：
 3. **G**lobal —— 模块全局
 4. **B**uilt-in —— Python 内置作用域
 
+```python
+>>> x = "global"                # G——全局变量
+>>> def outer():
+...     x = "enclosing"         # E——外层函数变量
+...     def inner():
+...         x = "local"         # L——局部变量（优先级最高）
+...         print(x)
+...     inner()
+...
+>>> outer()
+local
+>>> x  # 全局变量的 x 保持不变
+'global'
+```
+
+Python 在 `inner()` 内部查找 `x` 时，先在 **Local**（`"local"`）中找到，直接使用，不再继续向外查找。  
+
+如果去掉 `inner()` 中的 `x = "local"`，则会使用 **Enclosing** 层的 `"enclosing"`；  
+
+再去掉 `outer()` 中的定义，则会使用 **Global** 层的 `"global"`；  
+
+如果连全局变量也没定义，最后才会查找 **Built-in** 作用域——比如 `len`、`print` 等内置名称。
+
 ## 递归
 
 > **递归 (Recursion)** 是指函数调用自身的一种编程技巧。
