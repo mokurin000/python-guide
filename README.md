@@ -62,10 +62,10 @@
 
 ### Day 6：错误处理
 
-* [ ] `try...except`
-  * [ ] `EOFError`
-  * [ ] `ValueError`
-* [ ] `raise`
+* [x] `try...except`
+  * [x] `EOFError`
+  * [x] `ValueError`
+* [x] `raise`
 
 ### Day 7：对象与类
 
