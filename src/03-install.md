@@ -41,6 +41,8 @@
 
 ![安装完成](img/03/step04.png)
 
+点击 `Disable path length limit`, 同意授权，然后点击 `Close` 关闭即可。
+
 ## Visual Studio Code
 
 **WIP: VSCode v.s. PyCharm**
