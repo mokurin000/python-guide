@@ -3,13 +3,11 @@
 块层级内部会直接覆盖函数局部定义变量。
 """
 
-x = 42
-
 
 def sample() -> int:
-    result = x
+    result = 42
     if result:
-        result = x + 1
+        result = result + 1
     return result
 
 
@@ -20,7 +18,7 @@ def user_func() -> int:
     True
     """
     # 修改为正确的数值
-    return ...
+    return 42
 
 
 if __name__ == "__main__":
