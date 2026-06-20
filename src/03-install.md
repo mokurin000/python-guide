@@ -5,7 +5,9 @@
 - [CPython 3.14.6](https://mirrors.bfsu.edu.cn/python/3.14.6/)
 - [Visual Studio Code](https://code.visualstudio.com/Download)
   - Ruff
-  - ZubanLS
+  - Even Better TOML
+  - Pylance
+  - Rainbow CSV
 
 注意，你的 Windows 版本应该不低于 Windows 10 。
 
