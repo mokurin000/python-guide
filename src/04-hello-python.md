@@ -26,6 +26,12 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 其中，`3.14.6` 是当前启动的 Python 版本。
 
+> 注意：`>>> ` 是 Python 的**提示符 (prompt)**，表示 Python 正在等待你输入代码。
+> 
+> 这个 `>>> ` 是由 Python 自动显示的，**你不需要输入它**，只需输入其后紧跟的代码即可。
+> 
+> 输入完成后按回车，Python 会执行代码并在下一行显示结果（结果不带 `>>> ` 前缀）。
+
 现在输入 `print("Hello, world")`，然后按回车运行：
 
 ```python
