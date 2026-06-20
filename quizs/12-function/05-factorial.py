@@ -23,6 +23,13 @@ def factorial(n: int) -> int:
 
 
 if __name__ == "__main__":
+    import dis
     import doctest
+
+    testfunc = factorial
+    assert any(
+        inst.opname == "LOAD_GLOBAL" and inst.argval == testfunc.__name__
+        for inst in dis.get_instructions(testfunc)
+    ), "你必须通过递归实现！"
 
     doctest.testmod(verbose=True)
