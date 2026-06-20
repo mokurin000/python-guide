@@ -21,3 +21,4 @@
 - [附录：文件读写](./appendix-file-io.md)
 - [附录：装饰器](./appendix-decorators.md)
 - [附录：第三方包与虚拟环境](./appendix-packages.md)
+- [附录：现代化 Python 生态速览](./appendix-ecosystem.md)
