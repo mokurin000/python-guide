@@ -18,7 +18,7 @@ def user_func() -> int:
     True
     """
     # 修改为正确的数值
-    return 42
+    return ...
 
 
 if __name__ == "__main__":
