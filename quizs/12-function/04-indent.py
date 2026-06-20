@@ -24,7 +24,7 @@ def user_func() -> int:
 
 
 if __name__ == "__main__":
-    # 反射检查：样板函数 sample 不得调用任何函数
+    # 反射检查：不得调用 sample() 直接实现
     import dis
 
     calls = [i for i in dis.get_instructions(user_func) if i.opname.startswith("CALL")]
