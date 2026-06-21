@@ -25,6 +25,36 @@
 生成器被关闭
 ```
 
+但如果生成器持有外部资源（例如网络连接、文件句柄），仅仅依赖 `close()` 的显式调用是不够的——调用者可能忘记手动关闭。`contextlib.closing` 可以将生成器的关闭操作绑定到 `with` 语句中，自动管理资源释放：
+
+```python
+from contextlib import closing
+def read_lines():
+    with open("book.toml", encoding="utf-8") as f:
+        print("文件已打开")
+        for line in f:
+            yield line.strip()
+    print("文件已关闭")
+
+with closing(read_lines()) as lines:
+    for i, line in enumerate(lines, start=1):
+        print(f"第 {i} 行：{line}")
+        if i >= 3:
+            break
+```
+
+示例输出:
+
+```text
+文件已打开
+第 1 行：...
+第 2 行：...
+第 3 行：...
+文件已关闭
+```
+
+`with` 块退出时，`closing()` 会自动调用生成器的 `.close()` 方法，注入 `GeneratorExit` 异常，从而触发 `finally` 块执行资源清理。关于 `contextlib` 模块的更多内容，请参考[文件 I/O 附录](./appendix-file-io.md)中的上下文管理器相关章节。
+
 > 关闭后的生成器不能再使用——任何对它的 `next()` 或 `send()` 调用都会抛出 `StopIteration`。
 
 ### `.send()` —— 向生成器发送值
