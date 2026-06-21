@@ -2,6 +2,31 @@
 
 生成器对象除了支持 `next()` 之外，还额外提供了三个方法，用于在运行中与生成器交互。
 
+### `.close()` —— 关闭生成器
+
+`close()` 在生成器暂停的 `yield` 处注入 `GeneratorExit` 异常，强制生成器退出。如果生成器内部捕获了 `GeneratorExit`，必须重新抛出或直接返回，否则会报错：
+
+```python
+>>> def count_down(n):
+...     try:
+...         while n > 0:
+...             yield n
+...             n -= 1
+...     except GeneratorExit:
+...         print("生成器被关闭")
+...         raise
+...
+>>> gen = count_down(3)
+>>> next(gen)
+3
+>>> next(gen)
+2
+>>> gen.close()
+生成器被关闭
+```
+
+> 关闭后的生成器不能再使用——任何对它的 `next()` 或 `send()` 调用都会抛出 `StopIteration`。
+
 ### `.send()` —— 向生成器发送值
 
 `send(value)` 将值发送给生成器，替代当前的 `yield` 表达式的结果，并让生成器继续执行到下一个 `yield`：
@@ -63,37 +88,12 @@
 '除零错误'
 ```
 
-### `.close()` —— 关闭生成器
-
-`close()` 在生成器暂停的 `yield` 处注入 `GeneratorExit` 异常，强制生成器退出。如果生成器内部捕获了 `GeneratorExit`，必须重新抛出或直接返回，否则会报错：
-
-```python
->>> def count_down(n):
-...     try:
-...         while n > 0:
-...             yield n
-...             n -= 1
-...     except GeneratorExit:
-...         print("生成器被关闭")
-...         raise
-...
->>> gen = count_down(3)
->>> next(gen)
-3
->>> next(gen)
-2
->>> gen.close()
-生成器被关闭
-```
-
-> 关闭后的生成器不能再使用——任何对它的 `next()` 或 `send()` 调用都会抛出 `StopIteration`。
-
 ### 小结
 
 | 方法           | 作用                            |
 | -------------- | ------------------------------- |
+| `.close()`     | 注入 `GeneratorExit` 关闭生成器 |
 | `.send(value)` | 向生成器发送值，继续执行        |
 | `.throw(exc)`  | 在 `yield` 处注入异常           |
-| `.close()`     | 注入 `GeneratorExit` 关闭生成器 |
 
 这三个方法在日常开发中不如 `for` 循环和 `next()` 常用，但它们在实现协程、异步编程、以及复杂生成器控制流时非常重要。
